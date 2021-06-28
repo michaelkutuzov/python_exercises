@@ -47,3 +47,77 @@ type(x) # получить тип
 #### Стек вызовов
 
 Стек — абстрактная структура данных по принципу LIFO
+
+#### Способы передачи аргументов в функцию
+
+```python
+def printab(a, b):
+    print(a, b)
+
+printab(10, 20)
+printab(a = 10, b = 20)
+
+lst = [10, 20]
+printab(*lst)
+
+args = {'a': 10, 'b': 20}
+printab(**args)
+```
+
+#### Аргументы по умолчанию
+
+```python
+def printab(a,b):
+    return 0
+def printab(a,b = 20):
+    return 0
+def printab(a = 10,b = 20):
+    return 0
+# Некорректная запись, аргументы по умолчанию должны идти после обычных
+def printab(a = 10, b):
+    return 0
+```
+
+#### Неопределённое число аргументов
+
+##### Неименованные дополнительные аргументы
+```python
+def printab(a, b, *args):
+    print(a) # Print positional argument a
+    print(b) # Print positional argument b
+    for i in args: # Print all additional arguments
+        print(i)
+printab(10, 20, 30, 40, 50)
+
+# 10
+# 20
+# 30
+# 40
+# 50
+```
+
+##### Именованные дополнительные аргументы
+```python
+def printab(a, b, **kwargs):
+    print(a) # Print positional argument a
+    print(b) # Print positional argument b
+    for key in kwargs: # Print all additional arguments
+        print(key, kwargs[key])
+
+printab(10, 20, c = 30, d = 40, jimmy = 50)
+# 10
+# 20
+# c 30
+# d 40
+# jimmy 50
+```
+
+#### Синтаксически верное определение функции
+
+```python
+def function_name([positional args,
+                  [positional_args_with_default,
+                  [*pos_args_name,
+                  [keyword_only_args,
+                  [**kwargs_name]]]]])
+```
